@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AppContext } from './App';
 
 function Login() {
+  const { setLoggedIn, setAccountName, setAccountEmail } = useContext(AppContext);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     axios.post('http://localhost:3001/login', { email, password })
       .then(res => {
         console.log(res);
-        if (res.data === 'success') {
+        if (res.data.status === 'success') {
+          setLoggedIn(true);
+          setAccountName(res.data.name);
+          setAccountEmail(res.data.email);
           navigate('/home');
         }  
       })
@@ -51,6 +56,8 @@ function Login() {
           </div>
           <button type='submit' className='btn btn-success w-100 rounded-0'>Login</button>
         </form>
+        <p>Create a new account</p>
+        <Link to='/login' className='btn btn-success w-100 rounded-0'>Register</Link>
       </div>
     </div>
   );

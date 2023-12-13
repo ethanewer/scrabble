@@ -8,13 +8,10 @@ function Signup() {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     axios.post('http://localhost:3001/register', { name, email, password })
-      .then(res => {
-        console.log(res);
-        navigate('/login');
-      })
+      .then(() => navigate('/login'))
       .catch(err => console.log(err));
   };
 
@@ -63,6 +60,7 @@ function Signup() {
           </div>
           <button type='submit' className='btn btn-success w-100 rounded-0'>Register</button>
         </form>
+        <p>Login to an existing account</p>
         <Link to='/login' className='btn btn-success w-100 rounded-0'>Login</Link>
       </div>
     </div>
