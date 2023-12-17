@@ -7,14 +7,21 @@ import axios from 'axios';
 function StatusBar() {
   const navigate = useNavigate();
   const { setLoggedIn, setAccountName, setAccountEmail } = useContext(AppContext);
-}
 
-function handleLogout() {
-  setLoggedIn(false);
-  setAccountName('');
-  setAccountEmail('');
-  navigate('/login');
-};
+  function handleLogout() {
+    setLoggedIn(false);
+    setAccountName('');
+    setAccountEmail('');
+    navigate('/login');
+  };
+
+  return (
+    <div className="status-bar d-flex justify-content-between align-items-center bg-dark text-light p-2">
+      <div>Status Bar</div>
+      <button type='submit' className='btn btn-success w-10 rounded-0' onClick={handleLogout}>Logout</button>
+    </div>
+  );
+}
 
 function GameTable() {
   const { accountEmail } = useContext(AppContext);
