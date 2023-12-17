@@ -5,6 +5,17 @@ import UserModel from './models/User.js';
 import GameModel from './models/Game.js';
 import { isValidMove, playMove } from './gameLogic.js';
 
+/**
+ * @returns {string}
+ */
+function emptyBoardString() {
+  let s = '';
+  for (let i = 0; i < 15 * 15; i++) {
+    s += ' ';
+  }
+  return s;
+}
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -53,8 +64,9 @@ app.post('/newgame', (req, res) => {
     rack2: '',
     score1: 0,
     score2: 0,
-    board: '',
+    board: emptyBoardString(),
     bag: '',
+    player1Turn: true,
   });
 });
 
