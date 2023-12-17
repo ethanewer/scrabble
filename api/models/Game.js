@@ -9,6 +9,7 @@ const GameSchema = new mongoose.Schema({
   score2: Number,
   board: String,
   bag: String,
+  player1Turn: Boolean,
 });
 
 const GameModel = mongoose.model('games', GameSchema);
