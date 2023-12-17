@@ -34,10 +34,10 @@ function Login() {
               <strong>Email</strong>
             </label>
             <input 
+              id='email'
               type='text' 
               placeholder='Enter Email' 
               autoComplete='off' 
-              name='email' 
               className='form-control rounded-0'
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -47,9 +47,9 @@ function Login() {
               <strong>Password</strong>
             </label>
             <input 
+              id='password'
               type='password'
               placeholder='Enter Password' 
-              name='password' 
               className='form-control rounded-0'
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -57,7 +57,7 @@ function Login() {
           <button type='submit' className='btn btn-success w-100 rounded-0'>Login</button>
         </form>
         <p>Create a new account</p>
-        <Link to='/login' className='btn btn-success w-100 rounded-0'>Register</Link>
+        <Link to='/register' className='btn btn-success w-100 rounded-0'>Register</Link>
       </div>
     </div>
   );

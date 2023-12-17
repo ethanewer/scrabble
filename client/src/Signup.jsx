@@ -25,10 +25,10 @@ function Signup() {
               <strong>Name</strong>
             </label>
             <input 
+              id='name'
               type='text' 
               placeholder='Enter Name' 
               autoComplete='off' 
-              name='name' 
               className='form-control rounded-0'
               onChange={(e) => setName(e.target.value)}
             />
@@ -38,22 +38,22 @@ function Signup() {
               <strong>Email</strong>
             </label>
             <input 
+              id='email'
               type='text' 
               placeholder='Enter Email' 
               autoComplete='off' 
-              name='email' 
               className='form-control rounded-0'
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className='mb-3'>
-            <label htmlFor='password'>
+              <label htmlFor='password'>
               <strong>Password</strong>
             </label>
             <input 
+              id='password'
               type='password'
               placeholder='Enter Password' 
-              name='password' 
               className='form-control rounded-0'
               onChange={(e) => setPassword(e.target.value)}
             />
