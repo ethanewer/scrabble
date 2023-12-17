@@ -36,14 +36,14 @@ import axios from 'axios';
         .catch(error => {
           console.error('Error fetching games:', error);
         });
-    }, [accountEmail]); // Include accountEmail in the dependencies array to re-fetch when it changes
+    }, [accountEmail]); // re-fetch when email changes
   
     return (
-      <div className="game-table">
-        <h2>Your Games</h2>
-        <ul>
+      <div className="game-table d-flex flex-column justify-content-center align-items-center w-75 mb-5">
+        <h2 className="mb-3">Your Games</h2>
+        <ul className="d-flex justify-content-around flex-wrap w-75">
           {games.map(game => (
-            <li key={game._id}>{`${game.email1} vs ${game.email2}`}</li>
+            <div key={game._id}>{`${game.email1} vs ${game.email2}`}</div>
           ))}
         </ul>
       </div>
@@ -52,13 +52,13 @@ import axios from 'axios';
 
   function NewGameButton() {
     const { accountEmail } = useContext(AppContext);
-
+    console.log(accountEmail)
     function newGame() {
       axios.post('http://localhost:3001/newgame', { email1: accountEmail, email2: 'test@email.com' })
         .catch(err => console.log(err));
     }
 
-    return <button className="new-game-button" onClick={newGame}>New Game</button>;
+    return <button className="btn btn-success new-game-button" onClick={newGame}>New Game</button>
   };
 
 function Home() {
@@ -74,8 +74,10 @@ function Home() {
   return (
     <div className="home-page">
       <StatusBar />
-      <GameTable />
-      <NewGameButton />
+      <div className="d-flex flex-column justify-content-center align-items-center vw-100 mt-5">
+        <GameTable />
+        <NewGameButton />
+      </div>
     </div>
   );
 }
