@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import UserModel from './models/User.js';
 import GameModel from './models/Game.js';
+import { isValidMove, playMove } from './gameLogic.js';
 
 const app = express();
 app.use(express.json());
@@ -69,6 +70,41 @@ app.get('/games', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/game/:id', async (req, res) => {
+  const gameId = req.params.id;
+
+  try {
+    const game = await GameModel.findById(gameId);
+    if (!game) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    res.json(game);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/game/move/:id', async (req, res) => {
+  const { move } = req.body;
+  const gameId = req.params.id;
+
+  try {
+    const game = await GameModel.findById(gameId);
+    if (!game) {
+      return res.status(404).json({ error: 'Game not found' });
+    }
+    if (!isValidMove(game, move)) {
+      res.json({ status: 'fail', game: game });
+    }
+    const updatedGame = playMove(gameId, move);
+    res.json({ status: 'success', game: updatedGame });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
