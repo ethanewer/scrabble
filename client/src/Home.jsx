@@ -18,12 +18,13 @@ function StatusBar() {
   return (
     <div className="status-bar d-flex justify-content-between align-items-center bg-dark text-light p-2">
       <div>Status Bar</div>
-      <button type='submit' className='btn btn-success w-10 rounded-0' onClick={handleLogout}>Logout</button>
+      <button type='submit' className='btn btn-success w-10 rounded-2' onClick={handleLogout}>Logout</button>
     </div>
   );
 }
 
 function GameTable() {
+  const navigate = useNavigate();
   const { accountEmail } = useContext(AppContext);
   const [games, setGames] = useState([]);
 
@@ -38,12 +39,16 @@ function GameTable() {
       });
   }, [accountEmail]); // re-fetch when email changes
 
+  function handleOpenGame() {
+    navigate("/board");
+  }
+
   return (
     <div className="game-table d-flex flex-column justify-content-center align-items-center w-75 mb-5">
-      <h2 className="mb-3">Your Games</h2>
-      <ul className="d-flex justify-content-around flex-wrap w-75">
+      <h2 className="mb-4">Your Games</h2>
+      <ul className="list-group d-flex justify-content-around flex-wrap">
         {games.map(game => (
-          <div key={game._id}>{`${game.email1} vs ${game.email2}`}</div>
+          <li className="list-group-item btn btn-success" onClick={handleOpenGame} key={game._id}>{`${game.email1} vs ${game.email2}`}</li>
         ))}
       </ul>
     </div>
