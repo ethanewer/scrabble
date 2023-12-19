@@ -4,6 +4,7 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Signup from './Signup';
 import Login from './Login';
 import Home from './Home';
+import BoardView from './Board';
 
 export const AppContext = createContext();
 
@@ -48,6 +49,7 @@ function App() {
             <Route path='/register' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path='/home' element={<Home />} />
+            <Route path='/board' element={<BoardView />} />
           </Routes>
         </AppContext.Provider>
       </BrowserRouter>
